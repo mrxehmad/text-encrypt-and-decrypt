@@ -26,8 +26,8 @@ This project is a web-based application that allows users to encrypt and decrypt
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/message-encode-decode.git
-   cd message-encode-decode
+   git clone https://github.com/mrxehmad/text-encrypt-and-decrypt
+   cd text-encrypt-and-decrypt
    ```
 
 2. **Open the Application**:
