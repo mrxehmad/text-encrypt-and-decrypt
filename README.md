@@ -97,7 +97,7 @@ For any questions or support, contact [AHMADFARAZWARRICH@GMAIL.COM].
 ## **Screenshots**
 
 ### 1. Encryption Page
-![Encryption page screenshot](screenshots/encryption-page.png)
+![Encryption page screenshot](https://raw.githubusercontent.com/mrxehmad/text-encrypt-and-decrypt/refs/heads/main/1.png)
 
 ### 2. Decryption Page
-![Decryption page screenshot](screenshots/decryption-page.png)
+![Decryption page screenshot](https://raw.githubusercontent.com/mrxehmad/text-encrypt-and-decrypt/refs/heads/main/2.png)
