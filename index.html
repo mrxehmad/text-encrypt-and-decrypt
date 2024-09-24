@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Message Encode & Decode</title>
+  <link href="http://file.local/Guest/cdn/bootstrap.min.css" rel="stylesheet" onerror="this.onerror=null;this.href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css';">
+  <style>
+    body {
+      padding-top: 56px; /* Adjusts for the navbar height */
+    }
+    
+    .container-content {
+      margin-top: 20px;
+    }
+    
+    textarea {
+      resize: none;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Message Encode & Decode</a>
+    <div class="ml-auto">
+      <button class="btn btn-primary mr-2" onclick="showEncrypt()">Encrypt</button>
+      <button class="btn btn-primary" onclick="showDecrypt()">Decrypt</button>
+    </div>
+  </nav>
+  
+  <div class="container-fluid">
+    <div id="encryptContainer" class="container-content">
+      <h2>Encrypt</h2>
+      <div class="form-group">
+        <label for="encryptText">Text to Encrypt:</label>
+        <textarea class="form-control" id="encryptText" rows="4"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="encryptKey">Encryption Key:</label>
+        <input type="password" class="form-control" id="encryptKey">
+      </div>
+      <button class="btn btn-success" onclick="encryptText()">Convert</button>
+      <button class="btn btn-secondary" onclick="copyText('encryptText')">Copy</button>
+    </div>
+    
+    <div id="decryptContainer" class="container-content" style="display: none;">
+      <h2>Decrypt</h2>
+      <div class="form-group">
+        <label for="decryptText">Text to Decrypt:</label>
+        <textarea class="form-control" id="decryptText" rows="4"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="decryptKey">Decryption Key:</label>
+        <input type="password" class="form-control" id="decryptKey">
+      </div>
+      <button class="btn btn-success" onclick="decryptText()">Convert</button>
+      <button class="btn btn-secondary" onclick="copyText('decryptText')">Copy</button>
+    </div>
+  </div>
+
+  <script src="http://file.local/Guest/cdn/jquery-3.5.1.slim.min.js" onerror="this.onerror=null;this.src='https://code.jquery.com/jquery-3.5.1.slim.min.js';"></script>
+  <script src="http://file.local/Guest/cdn/popper.min.js" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js';"></script>
+  <script src="http://file.local/Guest/cdn/bootstrap.min.js" onerror="this.onerror=null;this.src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js';"></script>
+  <script src="http://file.local/Guest/cdn/crypto-js.min.js" onerror="this.onerror=null;this.src='https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js';"></script>
+  <script>
+    function showEncrypt() {
+      clearFields();
+      document.getElementById('encryptContainer').style.display = 'block';
+      document.getElementById('decryptContainer').style.display = 'none';
+    }
+
+    function showDecrypt() {
+      clearFields();
+      document.getElementById('encryptContainer').style.display = 'none';
+      document.getElementById('decryptContainer').style.display = 'block';
+    }
+
+    function encryptText() {
+      const text = document.getElementById('encryptText').value;
+      const key = document.getElementById('encryptKey').value;
+      if (text && key) {
+        const encrypted = CryptoJS.AES.encrypt(text, key).toString();
+        document.getElementById('encryptText').value = encrypted;
+      } else {
+        alert('Please enter both text and key for encryption.');
+      }
+    }
+
+    function decryptText() {
+      const text = document.getElementById('decryptText').value;
+      const key = document.getElementById('decryptKey').value;
+      if (text && key) {
+        try {
+          const decrypted = CryptoJS.AES.decrypt(text, key).toString(CryptoJS.enc.Utf8);
+          document.getElementById('decryptText').value = decrypted;
+        } catch (e) {
+          alert('Invalid key or corrupted encrypted text.');
+        }
+      } else {
+        alert('Please enter both text and key for decryption.');
+      }
+    }
+
+    function copyText(elementId) {
+      const textArea = document.getElementById(elementId);
+      textArea.select();
+      document.execCommand('copy');
+      alert('Text copied to clipboard');
+    }
+
+    function clearFields() {
+      document.getElementById('encryptText').value = '';
+      document.getElementById('encryptKey').value = '';
+      document.getElementById('decryptText').value = '';
+      document.getElementById('decryptKey').value = '';
+    }
+
+    window.onload = clearFields;
+  </script>
+</body>
+</html>
